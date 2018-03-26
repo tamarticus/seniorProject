@@ -1,0 +1,135 @@
+<!doctype HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fake Your News</title>
+  </head>
+  <body>
+    <h1><span style="font-family: myFirstFont; color:red; max-width: 100%">Fake</span> Your News</h1>
+    <div id="response"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.3/p5.min.js"></script>
+    <script src="./rita-full.min.js"></script>
+    <script src="myscript.js"></script>
+    <style>
+    body{
+      font-family: "American Typewriter";
+      font-size: 24px;
+    }
+    p {
+      text-align: center;
+    }
+    h1{
+      font-family: "American Typewriter";
+      max-width: 90%;
+      text-align: center;
+      margin-top: 0;
+    }
+    form{
+      text-align: center;
+    }
+
+    @font-face {
+      font-family: myFirstFont;
+      src: url(White-Apparel.ttf);
+    }
+
+    input[type=text] {
+      height: 54px;
+      background: transparent;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #000000;
+      font-family: myFirstFont;
+      color: red;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+
+    .strikethrough {
+    position: relative;
+    }
+.strikethrough:before {
+  color: red;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-top: 1px solid;
+  border-color: inherit;
+
+  -webkit-transform:rotate(-5deg);
+  -moz-transform:rotate(-5deg);
+  -ms-transform:rotate(-5deg);
+  -o-transform:rotate(-5deg);
+  transform:rotate(-5deg);
+}
+    </style>
+    <script>
+    function makeWords() {
+      var isVerb, isAdj, isNoun = 0;
+      for(i = 0; i < document.getElementById("frm1").getElementsByClassName("strikethrough").length; i++){
+        var part = document.getElementById("frm1").getElementsByClassName("strikethrough")[i].innerText;
+        console.log(part[0,3]);
+        if(part[0]=="V"){
+          isVerb = 1;
+        }
+        if(part[0]=="N"){
+          isNoun = 1;
+        }
+        if(part[0]=="A"){
+          isAdj = 1;
+        }
+      }
+          if(isNoun == 1){var displayNoun = document.getElementById("frm1").noun.value;
+        console.log(displayNoun)}
+          if(isVerb == 1){var displayVerb = document.getElementById("frm1").verb.value;}
+          if(isAdj == 1){var displayAdj = document.getElementById("frm1").adjective.value;}
+          var hiddenHead = document.getElementById("headline1").innerText;
+          var makeSentence = hiddenHead.split(",");
+          console.log(makeSentence);
+          var dead = document.getElementById("withPunc").innerText;
+          var deadWords = dead.split(",");
+          var newSent = [];
+          var whichDead = 0;
+          for(i=0; i < makeSentence.length; i++){
+            if(makeSentence[i]=="NOUNHERE"||makeSentence[i]=="ADJHERE"||makeSentence[i]=="VERBHERE"){
+            newSent.push("<span class=\"strikethrough\" style =\"font-size:17px;\">"+ deadWords[whichDead]+"</span>");
+            whichDead++;
+            console.log("hey")
+            }
+            if(makeSentence[i]=="NOUNHERE"){
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayNoun.toUpperCase()+"</span>");
+              console.log("hi")
+            }
+            else if(makeSentence[i]=="VERBHERE"){
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayVerb.toUpperCase()+"</span>");
+            }
+            else if(makeSentence[i]=="ADJHERE"){
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayAdj.toUpperCase()+"</span>");
+            }
+            else{
+              newSent.push(makeSentence[i] + " ");
+            }
+            if(i != makeSentence.length-1){
+              newSent.push(" ");
+            }
+
+          }
+          console.log(newSent);
+          $("p").html(newSent);
+          $("p").show();
+          $("form").hide();
+
+    }
+
+    </script>
+<form id="frm1" >
+
+
+</form>
+
+
+  </body>
+</html>
