@@ -2,7 +2,7 @@
   url += '?' + $.param({
   'api-key': "5ed0d6f5d6b144f28712e3cbcfafc99b",
   'q': "Trump",
-  'begin_date': "20180325",
+  'begin_date': "20180326",
   'fl': "snippet, headline"
 });
 $.ajax({
