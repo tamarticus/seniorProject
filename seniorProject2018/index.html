@@ -1,39 +1,154 @@
 <!doctype HTML>
 <html lang="en">
   <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.3/p5.min.js"></script> -->
+    <script language="javascript" type="text/javascript" src="p5/addons/p5.dom.js"></script>
+
+    <script src="./rita-full.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta charset="utf-8">
+
     <title>Fake Your News</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1><span style="font-family: myFirstFont; color:red; max-width: 100%">Fake</span> Your News</h1>
-    <div id="response"></div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.3/p5.min.js"></script>
-    <script src="./rita-full.min.js"></script>
-    <script src="myscript.js"></script>
+    <script>
+    var oldX;
+    var oldY;
+    var canvas;
+    function setup() {
+    canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0,0);
+    // canvas.style("position","relative");
+    // canvas.style()
+    }
+    function draw(){
+  //  clear();
+    noStroke();
+    fill(0);
+    if(mouseIsPressed){
+    console.log("PRESS WORK");
+    stroke(255,0,0);
+    strokeWeight(1);
+    line(oldX, oldY, mouseX, mouseY);
+    }
+    oldX = mouseX;
+    oldY = mouseY;
 
-  <style>
-    body{
-      font-family: AmericanTypewriter;
-      font-size: 24px;
+
+    }
+    function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+
     }
 
+    </script>
+
+    <script src="myscript.js">  </script>
+
+    <div id="mid">
+
+    <h1><span style="font-family: myFirstFont; color:red; max-width: 100%; font-size: .7em;">FAKE</span> Your News</h1>
+    <div class="addthis_inline_share_toolbox"></div>
+    <h2>"History is a set of lies agreed upon.”<h3>- Napoléon Bonaparte</h3></h2>
+
+    <div id="opening">
+    <h4>Select a topic, then make some fake news!</h4>
+    <div id="buttons">
+    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="pol" onclick="myWholeJS('Trump')">Trump</button>
+    <button class="w3-button w3-white w3-border w3-border-red w3-round-large"id="celeb"onclick="myWholeJS('celebrity')">Celebrities</button>
+    <button class="w3-button w3-white w3-border w3-border-red w3-round-large"id="celeb"onclick="myWholeJS('tech')">Tech</button>
+  </div>
+    </div>
+    <div id="response"></div>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
+    <!-- <script src="myscript.js"></script> -->
+
+  <style>
+  #buttons{
+    text-align:  center;
+    position:fixed;
+    z-index: 9;
+    width:100%;
+    font-family: "times new roman";
+    font-size: 1em;
+}
+
+    body{
+      /* background-image: url("newspaperxs.png"); */
+      font-family: "Times New Roman";
+      font-size: 24px;
+      /* padding-left:15%;
+      padding-right: 15%; */
+      padding-top: 3%;
+      /* padding-bottom: 10%; */
+      cursor: url("pen.cur"), auto;
+      overflow:scroll;
+      height:100%;
+      margin:0;
+      padding:0;
+    }
+    #mid{
+    padding-top: 8%;
+      /* background-color: white; */
+      /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    }
     p {
       text-align: center;
     }
-    h1{
-      font-family: AmericanTypewriter;
-      max-width: 90%;
+    h2,h4{
+      font-family: "times new roman";
+      /* max-width: 100%; */
       text-align: center;
       margin-top: 0;
     }
+    h3{
+      font-size: .75em;
+      font-family: "times new roman";
+      text-align: center;
+      padding-bottom: 2%;
+
+    }
+    h1{
+      font-family: nyTimes;
+      /* max-width: 100%; */
+      text-align: center;
+      margin-top: 0;
+      font-size: 3em;
+      /* padding-top: 5%; */
+    }
+    h2{
+    font-style: italic;
+    padding-bottom: 0%;
+    }
     form{
       text-align: center;
+      position:fixed;
+      z-index: 9;
+      width:100%;
+    }
+    #share{
+      text-align:  center;
+      position:relative;
+      z-index: 9;
+      width:100%;
+      font-family: "times new roman";
+      font-size: 1em;
     }
 
     @font-face {
       font-family: myFirstFont;
       src: url(White-Apparel.ttf);
+    }
+    @font-face {
+      font-family: nyTimes;
+      src: url(nytimes.ttf);
     }
     @font-face {
       font-family: AmericanTypewriter;
@@ -93,8 +208,44 @@
           if(isVerb == 1){var displayVerb = document.getElementById("frm1").verb.value;}
           if(isAdj == 1){var displayAdj = document.getElementById("frm1").adjective.value;}
           var hiddenHead = document.getElementById("headline1").innerText;
-          var makeSentence = hiddenHead.split(",");
-          console.log(makeSentence);
+          // var punctuation = document.getElementById("punctuation").innerText;
+          // // var punctuationWhere = document.getElementById("punctuationWhere").innerText;
+          // var where = punctuationWhere.split(",");
+          //console.log("punc:" + punc);
+          // console.log("where:" + where);
+          word = ""
+          makeSentence = []
+          for(i=0;i<hiddenHead.length+1;i++){
+            if(hiddenHead[i]==","){
+              makeSentence.push(word);
+              word = "";
+            }
+
+            else if(i==hiddenHead.length+1){
+              word += hiddenHead[i];
+              makeSentence.push(word);
+            }
+            else{
+              word += hiddenHead[i];
+            }
+
+          }
+
+          //var makeSentence = hiddenHead.split(",");
+
+          // console.log("makesent"+makeSentence);
+          //Here I pull the cut out words from the news snippet so the user can see what was changed. I pull it from my JS by getting it out of hidden html
+          // var fixList = 0;
+          // var other = 0;
+          // for(i = 0; i < where.length; i++){
+          //   makeSentence.splice(((parseInt(where[i]))+fixList),0,(punctuation[other]));
+          //   console.log(where[i]+fixList, punctuation[other], "HERE");
+          //   fixList = 1;
+          //   other += 2;
+          // }
+          //var tryy = makeSentence.split(" ");
+          console.log("HUH"+makeSentence);
+
           var dead = document.getElementById("withPunc").innerText;
           var deadWords = dead.split(",");
           var newSent = [];
@@ -103,7 +254,6 @@
             if(makeSentence[i]=="NOUNHERE"||makeSentence[i]=="ADJHERE"||makeSentence[i]=="VERBHERE"){
             newSent.push("<span class=\"strikethrough\" style =\"font-size:17px;\">"+ deadWords[whichDead]+"</span>");
             whichDead++;
-            console.log("hey")
             }
             if(makeSentence[i]=="NOUNHERE"){
               newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayNoun.toUpperCase()+"</span>");
@@ -123,10 +273,13 @@
             }
 
           }
-          console.log(newSent);
+          console.log("sentence"+newSent);
           $("p").html(newSent);
           $("p").show();
           $("form").hide();
+          $("title").html(newSent);
+          $("#share").html("<input type= \"button\"class=\"w3-button w3-white w3-border w3-border-red w3-round-large\" onclick=\"window.location.href='share.html'\" value=\"Share\">")
+          $("#share").show();
 
     }
 
@@ -136,6 +289,15 @@
 
 </form>
 
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ad8a09fecf7defc"></script>
+<div id="share" hidden>
+
+</div>
+
+
+
+</div>
 
   </body>
 </html>

@@ -1,8 +1,12 @@
-    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+function myWholeJS(id){
+$("h2").html("");
+$("h3").html("");
+  $("#opening").hide();
+
+  var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
   url += '?' + $.param({
   'api-key': "5ed0d6f5d6b144f28712e3cbcfafc99b",
-  'q': "Trump",
-  'begin_date': "20180326",
+  'q': id,
   'fl': "snippet, headline"
 });
 $.ajax({
@@ -15,20 +19,54 @@ $.ajax({
   var headline = result.response.docs[randomArticle].snippet;
   console.log(headline);
   //make parts of speech
-  var partsOfSpeech = RiTa.getPosTags(headline);
-  var puncIndex = [];
-  var periodIndex = [];
-  for(i=0;i<partsOfSpeech.length;i++){
-    if (partsOfSpeech[i] == "." || partsOfSpeech[i] == "," || partsOfSpeech[i] == "\"" || partsOfSpeech[i] == "!" || partsOfSpeech[i] == "-" ||partsOfSpeech[i] == "&" ||partsOfSpeech[i] == ":" ||partsOfSpeech[i] == ";"){
-      puncIndex.push(partsOfSpeech[i]);
+  var headlineSplit = "";
+  for(i=1;i<headline.length+1;i++){
+    if(headline[i] == ","||headline[i] =="?"||headline[i] =="\""||headline[i] =="!"||headline[i] =="."||headline[i] ==":"||headline[i] ==";"||headline[i] =="\'"||headline[i] =="&"||headline[i] =="\("||headline[i] =="\)"||headline[i] ==","){
+    headlineSplit += headline[i-1];
+    headlineSplit += " ";
+    console.log("punc true");
+    console.log("OH"+headline[i]);
+    }
+    else{
+      headlineSplit += headline[i-1];
+
     }
   }
-  //$("body").append("<p1 hidden id=\"withPunc\">"+ puncIndex +"</p1>");
-  var newHead1 = headline.split(" ");
-  var newHead = newHead1.join(",").split(".").join(",").split("!").join(",").split("?").join(",").split(":").join(",").split(";").join(",").split("&").join(",").split("\(").join(",").split("\)").join(",").split("-").join(",").split(",");
-//var newHead= newHead1;
+  newHead = headlineSplit.split(" ");
+  var partsOfSpeech = RiTa.getPosTags(newHead);
+  console.log("SOL:"+ newHead);
 
-    console.log("newHead" + newHead1);
+  console.log("SPLIT", headlineSplit);
+
+
+
+//  var partsOfSpeech = RiTa.getPosTags(headline);
+  console.log("headline:"+headline);
+  var puncIndex = [];
+  var whereIndex = [];
+
+  // for(i=0;i<partsOfSpeech.length;i++){
+  //   // if (partsOfSpeech[i] == "." || partsOfSpeech[i] == "," || partsOfSpeech[i] == "\"" || partsOfSpeech[i] == "!" || partsOfSpeech[i] == "-" ||partsOfSpeech[i] == "&" ||partsOfSpeech[i] == ":" ||partsOfSpeech[i] == ";"){
+  //   //   puncIndex.push(partsOfSpeech[i]);
+  //   // }
+  //   code = partsOfSpeech[i].charCodeAt(0);
+  //   if((code > 47 && code < 58) || (code>64 && code < 91) || (code>96 && code < 123)){
+  //     var nothing = 0;
+  //   }
+  //   else{
+  //     puncIndex.push(partsOfSpeech[i]);
+  //     whereIndex.push(i);
+  //   }
+  // // }
+  // console.log("punc"+puncIndex+whereIndex);
+  // //$("body").append("<p1 hidden id=\"withPunc\">"+ puncIndex +"</p1>");
+
+//   var newHead1 = headline.split(" ");
+//   console.log("HEADLINEHERE"+newHead1);
+//   var newHead = newHead1.join(",").split(".").join(",").split("!").join(",").split("?").join(",").split(":").join(",").split(";").join(",").split("&").join(",").split("\(").join(",").split("\)").join(",").split("-").join(",").split(",");
+// //var newHead= newHead1;
+
+  //  console.log("newHead" + newHead1);
 
   console.log(partsOfSpeech);
   var verbIndex;
@@ -42,8 +80,9 @@ $.ajax({
 
   for(i = 0; i < partsOfSpeech.length; i++){
 
-    if (partsOfSpeech[i] == "vb" || partsOfSpeech[i] == "vbd" || partsOfSpeech[i] == "vbg" || partsOfSpeech[i] == "vbn"|| partsOfSpeech[i] == "vbp"|| partsOfSpeech[i] == "vbz"){
+    if ((partsOfSpeech[i] == "vb"||partsOfSpeech[i] == "vbd"||partsOfSpeech[i] == "vbg"||partsOfSpeech[i] =="vbn"||partsOfSpeech[i] =="vbp"||partsOfSpeech[i] =="vbz")&&(newHead[i]!="had"&&newHead[i]!="has"&&newHead[i]!="have"&&newHead[i]!="been"&&newHead[i]!="be"&&newHead[i]!="said"&&newHead[i]!="reports"&&newHead[i]!="reported"&&newHead[i]!="are"&&newHead[i]!="is"&&newHead[i]!="were"&&newHead[i]!="was")){
       verbIndex = i;
+      console.log("what is this doing: "+newHead[i]);
       verbType = partsOfSpeech[i];
       i = partsOfSpeech.length;
     }
@@ -79,7 +118,7 @@ var verbType1;
     verbType1 = "Verb, Past Particible:";
   }
   else if(verbType == "vbp"){
-    verbType1 = "Verb, non-3rd person singular present:";
+    verbType1 = "Verb (Base Form):";
   }
   else if(verbType == "vbz"){
     verbType1 = "Verb (Ending in \"s\"):";
@@ -148,18 +187,21 @@ for(i = 0; i < newHead.length; i++){
     }
   }
 }
+console.log("WHATTT", newHeadline);
 $("body").append("<p1 hidden id=\"withPunc\">"+ deadWords +"</p1>");
-
+$("body").append("<p3 hidden id=\"punctuation\">"+ puncIndex +"</p3>");
+$("body").append("<p4 hidden id=\"punctuationWhere\">"+ whereIndex +"</p4>");
 $("body").append("<p hidden id=\"headline1\">" + newHeadline + "</p>");
 
-$("form").append("<input type=\"button\" id=\"submit\" onclick=\"makeWords()\" value=\"Fake Your News\">");
+$("form").append("<input type=\"button\"class=\"w3-button w3-white w3-border w3-border-red w3-round-large\" id=\"submit\" onclick=\"makeWords()\" value=\"Fake Your News\">");
 
 }).fail(function(err) {
 
   throw err;
 
 });
-
+return 0;
+}
 // var myStory = result.response.docs["0"].headline.main;
 // var partsOfSpeech = RiTa.getPosTags(myStory);
 // console.log(partsOfSpeech);
