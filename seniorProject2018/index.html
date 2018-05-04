@@ -21,7 +21,7 @@
     function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.position(0,0);
-    canvas.style("position","relative");
+    // canvas.style("position","relative");
     // canvas.style()
     }
     function draw(){
@@ -246,6 +246,7 @@
           //   other += 2;
           // }
           //var tryy = makeSentence.split(" ");
+          makeSentence.push(".");
           console.log("HUH"+makeSentence);
 
           var dead = document.getElementById("withPunc").innerText;
@@ -267,20 +268,22 @@
             else if(makeSentence[i]=="ADJHERE"){
               newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayAdj.toUpperCase()+"</span>");
             }
+            else if (makeSentence[i+1] == ","||makeSentence[i+1] =="?"||makeSentence[i+1] =="\""||makeSentence[i+1] =="!"||makeSentence[i+1] =="."||makeSentence[i+1] ==":"||makeSentence[i+1] ==";"||makeSentence[i+1] =="\'"||makeSentence[i+1] =="&"||makeSentence[i+1] =="\("||makeSentence[i+1] =="\)"||makeSentence[i+1] ==","){
+              newSent.push(makeSentence[i]);
+            }
             else{
               newSent.push(makeSentence[i] + " ");
             }
-            if(i != makeSentence.length-1){
-              newSent.push(" ");
-            }
+
 
           }
           console.log("sentence"+newSent);
+
           $("p").html(newSent);
           $("p").show();
           $("form").hide();
           $("title").html(newSent);
-          $("#share").html("<input type= \"button\"class=\"w3-button w3-white w3-border w3-border-red w3-round-large\" onclick=\"window.location.href='share.html'\" value=\"Share\">")
+          // $("#share").html("<input type= \"button\"class=\"w3-button w3-white w3-border w3-border-red w3-round-large\" onclick=\"window.location.href='share.html'\" value=\"Share\">")
           $("#share").show();
 
     }
@@ -292,7 +295,7 @@
 </form>
 
 <div id="share" hidden>
-
+<input type= "button"class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick="window.location.href='share.html'" value="Share">
 </div>
 
 

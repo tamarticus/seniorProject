@@ -115,7 +115,7 @@ var verbType1;
 
   }
   else if(verbType == "vbn"){
-    verbType1 = "Verb, Past Particible:";
+    verbType1 = "Verb (Past Tense):";
   }
   else if(verbType == "vbp"){
     verbType1 = "Verb (Base Form):";
@@ -142,7 +142,7 @@ else if(nounType == "nns"){
   nounType1 = "Noun (plural):";
 }
 else if(nounType == "nnp"){
-  nounType1 = "Noun (Proper sing.):";
+  nounType1 = "Noun (Proper singular):";
 }
 else if(nounType == "nnps"){
   nounType1 = "Noun (Proper plural):";
