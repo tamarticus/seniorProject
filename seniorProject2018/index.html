@@ -54,7 +54,7 @@
 
     <div id="mid">
 
-    <h1><span style="font-family: myFirstFont; color:red; max-width: 100%; font-size: .7em;">FAKE</span> Your News</h1>
+    <h1><span style="font-family: myFirstFont; color:red; max-width: 100%; font-size: .7em; font-weight: 600;">FAKE</span> Your News</h1>
     <h2>"History is a set of lies agreed upon.”<h3>- Napoléon Bonaparte</h3></h2>
 
     <div id="opening">
@@ -79,10 +79,18 @@
     font-size: 1em;
 }
 
+#morebuttons{
+  text-align:  center;
+  position:relative;
+  z-index: 9;
+  width:100%;
+  font-family: "times new roman";
+  font-size: 1em;
+}
     body{
-      /* background-image: url("newspaperxs.png"); */
+      background-image: url("notebook.jpg");
       font-family: "Times New Roman";
-      font-size: 24px;
+      font-size: 30px;
       /* padding-left:15%;
       padding-right: 15%; */
       padding-top: 3%;
@@ -90,8 +98,7 @@
       cursor: url("pen.cur"), auto;
       overflow:scroll;
       height:100%;
-      margin:0;
-      padding:0;
+      margin:2%;
     }
     #mid{
     padding-top: 8%;
@@ -135,7 +142,7 @@
       z-index: 9;
       width:100%;
     }
-    #share{
+    #morebuttons{
       text-align:  center;
       position:relative;
       z-index: 9;
@@ -164,6 +171,7 @@
       border: none;
       border-bottom: 1px solid #000000;
       font-family: myFirstFont;
+      font-weight: 600;
       color: red;
       font-size: 30px;
       text-transform: uppercase;
@@ -259,14 +267,14 @@
             whichDead++;
             }
             if(makeSentence[i]=="NOUNHERE"){
-              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayNoun.toUpperCase()+"</span>");
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;font-weight: 600;\">"+displayNoun.toUpperCase()+"</span>");
               console.log("hi")
             }
             else if(makeSentence[i]=="VERBHERE"){
-              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayVerb.toUpperCase()+"</span>");
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;font-weight: 600;\">"+displayVerb.toUpperCase()+"</span>");
             }
             else if(makeSentence[i]=="ADJHERE"){
-              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;\">"+displayAdj.toUpperCase()+"</span>");
+              newSent.push("<span style=\"font-family:myFirstFont; color:red;font-size:40px;font-weight: 600;\">"+displayAdj.toUpperCase()+"</span>");
             }
             else if (makeSentence[i+1] == ","||makeSentence[i+1] =="?"||makeSentence[i+1] =="\""||makeSentence[i+1] =="!"||makeSentence[i+1] =="."||makeSentence[i+1] ==":"||makeSentence[i+1] ==";"||makeSentence[i+1] =="\'"||makeSentence[i+1] =="&"||makeSentence[i+1] =="\("||makeSentence[i+1] =="\)"||makeSentence[i+1] ==","){
               newSent.push(makeSentence[i]);
@@ -279,12 +287,13 @@
           }
           console.log("sentence"+newSent);
 
-          $("p").html(newSent);
-          $("p").show();
+          $("#word").html(newSent);
+          $("#word").show();
           $("form").hide();
-          $("title").html(newSent);
+          // $("title").html(newSent);
           // $("#share").html("<input type= \"button\"class=\"w3-button w3-white w3-border w3-border-red w3-round-large\" onclick=\"window.location.href='share.html'\" value=\"Share\">")
-          $("#share").show();
+          $("#morebuttons").show();
+
 
     }
 
@@ -293,12 +302,31 @@
 
 
 </form>
+<div id="morebuttons" hidden>
+  <script>
+  function tweetMe(){
+  var twitter = ["\"We the people fake our news.\" -The U.S. Constition", "\"Ask not what your country can do for you. Ask how you can fake your news.\" -J.F.K.", "\"Give me liberty or give me fake news!\" -Patrick Henry", "\"Speak softly and fake your news; you will go far.\" -Theodore Roosevelt", "\"I only regret that I have one piece of fake news for my country\" -Nathan Hale"]
+  var randomTweet = Math.floor((Math.random() * 4));
+  var tweet = twitter[randomTweet];
+  var shareThis = "https://twitter.com/home?status="
+  for(i=0;i<tweet.length;i++){
+    if(tweet[i]==" "){
+     shareThis += "%20"
+    }
+    else{
+      shareThis += tweet[i];
+    }
+  }
+  shareThis += "%20http%3A//sites.bxmc.poly.edu/~tamarpalgon/seniorProject/seniorProject2018/"
+  console.log("SHARETHIS:", shareThis);
+  return shareThis;
+}
 
-<div id="share" hidden>
-<input type= "button"class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick="window.location.href='share.html'" value="Share">
+</script>
+  <p id="word" hidden></p>
+  <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="share" onclick="window.location.href=tweetMe()">Share The Power</button>
+  <button class="w3-button w3-white w3-border w3-border-red w3-round-large"id="more"onclick="window.location.href='index.html'">Fake More News</button>
 </div>
-
-
 
 </div>
 
