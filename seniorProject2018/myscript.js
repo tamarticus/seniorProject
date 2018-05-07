@@ -151,20 +151,20 @@ else if(nounType == "nnps"){
   var indexList = [];
   var isVerb, isAdj, isNoun = 0;
   if(verbIndex != undefined){
-    $("form").append("<span class=\"strikethrough\">"+verbType1+"</span> <input type=\"text\" name=\"verb\"><br><br>");
+    $("form").append("<span class=\"change\">"+verbType1+"</span> <input type=\"text\" name=\"verb\"><br><br>");
     isVerb = 1;
     indexList.push("VERBHERE");
     indexList.push(verbIndex);
   }
   if(nounIndex != undefined){
-    $("form").append("<span class=\"strikethrough\">"+nounType1+"</span> <input type=\"text\" name=\"noun\"><br><br>");
+    $("form").append("<span class=\"change\">"+nounType1+"</span> <input type=\"text\" name=\"noun\"><br><br>");
     isNoun = 1;
     indexList.push("NOUNHERE");
     indexList.push(nounIndex);
 
   }
   if(adjIndex != undefined){
-    $("form").append("<span class=\"strikethrough\">"+adjType1+"</span> <input type=\"text\" name=\"adjective\"><br><br><br>");
+    $("form").append("<span class=\"change\">"+adjType1+"</span> <input type=\"text\" name=\"adjective\"><br><br><br>");
     isAdj = 1;
     indexList.push("ADJHERE");
     indexList.push(adjIndex);
